@@ -1,0 +1,7 @@
+.storyReal {
+  display: flex;
+}
+
+.storyReal__story {
+  margin-left: 10px;
+}

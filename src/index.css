@@ -1,5 +1,6 @@
 :root {
   --MainTransition: 0.4s;
+  --MainColor: #2e81f4;
 }
 * {
   margin: 0;

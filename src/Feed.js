@@ -1,26 +1,42 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import StoryReal from "./StoryReal";
 import MessageSender from "./MessageSender";
 import Post from "./Post";
+import db from "./firebase";
 import "./Feed.css";
 
 const Feed = () => {
+  const [posts, setPosts] = useState([]);
+  useEffect(() => {
+    db.collection("posts")
+      .orderBy("timestamp", "desc")
+      .onSnapshot(snapshot => {
+        setPosts(
+          snapshot.docs.map(doc => ({
+            id: doc.id,
+            data: doc.data(),
+          }))
+        );
+      });
+  }, []);
+
   return (
     <div className="feed">
       <StoryReal />
       <MessageSender />
 
-      <Post
-        key={1}
-        profilePic="https://assets.entrepreneur.com/content/3x2/2000/20190502194704-ent19-june-editorsnote.jpeg"
-        message="ازيكم يا شباب؟"
-        timestamp="1/12/2021"
-        username="Moussa Ibrahiem"
-        image="https://assets.entrepreneur.com/content/3x2/2000/20190502194704-ent19-june-editorsnote.jpeg"
-      />
-      <Post />
-      <Post />
-      <Post />
+      {posts.map(post => (
+        <Post
+          key={post.id}
+          id={post.id}
+          profilePic={post.data.profilePic}
+          message={post.data.message}
+          timestamp={post.data.timestamp}
+          username={post.data.username}
+          image={post.data.image}
+          likes={post.data.likes}
+        />
+      ))}
     </div>
   );
 };

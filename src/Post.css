@@ -21,7 +21,7 @@
   font-size: medium;
 }
 
-.post__topInfo > p {
+.post__topInfo > time {
   font-size: small;
   color: gray;
 }
@@ -36,6 +36,8 @@
   width: 97%;
   padding: 5px 10px;
   border-radius: 12px;
+  max-height: 350px;
+  object-fit: fill;
 }
 
 .post__options {
@@ -64,4 +66,8 @@
 .post__option:hover {
   background-color: #eff2f5;
   border-radius: 10px;
+}
+
+.post__Like-active {
+  color: var(--MainColor);
 }

@@ -1,5 +1,4 @@
 import React from "react";
-import "./Header.css";
 import SearchIcon from "@material-ui/icons/Search";
 import HomeIcon from "@material-ui/icons/Home";
 import FlagIcon from "@material-ui/icons/Flag";
@@ -11,13 +10,17 @@ import AddIcon from "@material-ui/icons/Add";
 import ForumIcon from "@material-ui/icons/Forum";
 import NotificationsActiveIcon from "@material-ui/icons/NotificationsActive";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import { useStateValue } from "./Context/StateProvider";
+import "./Header.css";
 
 const Header = () => {
+  const [{ user }, dispatch] = useStateValue();
+
   return (
     <div className="header">
       <div className="header__left">
         <img
-          src="https://cdn3.iconfinder.com/data/icons/capsocial-round/500/facebook-512.png"
+          src="https://iconape.com/wp-content/png_logo_vector/facebook-f-logo-2019.png"
           title="Logo"
           alt="Logo"
         />
@@ -45,8 +48,8 @@ const Header = () => {
       </div>
       <div className="header__right">
         <div className="header__info">
-          <Avatar />
-          <h4>Moussa Ibrahiem</h4>
+          <Avatar src={user.photoURL} />
+          <h4>{user.displayName}</h4>
         </div>
         <IconButton>
           <AddIcon />
